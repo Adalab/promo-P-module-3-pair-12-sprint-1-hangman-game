@@ -3,6 +3,26 @@ import { useState } from 'react';
 
 function App() {
   const [numberOfErrors, setnumberOfErrors] = useState(0);
+  const [lastLetter, setlastLetter] = useState('');
+
+  const handleChangeInput = (ev) => {
+    ev.preventDefault();
+    const value = ev.currentTarget.value;
+    console.log(value);
+    let regex = /[a-zA-Z\s]/;
+
+    if (regex.test(value)) {
+      setlastLetter(ev.currentTarget.value);
+    } else {
+      console.log('es numero');
+    }
+  };
+
+  const handleChangeLastLetter = (ev) => {
+    ev.preventDefault();
+    setlastLetter(ev.currentTarget.value);
+  };
+
   const handleClickbtn = (ev) => {
     ev.preventDefault();
     setnumberOfErrors(numberOfErrors + 1);
@@ -51,6 +71,9 @@ function App() {
               type='text'
               name='last-letter'
               id='last-letter'
+              value={lastLetter}
+              //onChange={handleChangeLastLetter}
+              onChange={handleChangeInput}
             />
             <button onClick={handleClickbtn}>Incremetar</button>
           </form>
